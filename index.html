@@ -1,0 +1,719 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AFTERTONE — Music & Youth Culture</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:wght@500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --paper: #f2ead9;
+      --ink: #29251e;
+      --red: #a63b2b;
+      --olive: #626849;
+      --muted: #827969;
+      --line: #cfc3ae;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Be Vietnam Pro", sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .wrap {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    .mono {
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .topline {
+      border-bottom: 1px solid var(--line);
+      padding: 12px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--muted);
+    }
+
+    header {
+      padding: 24px 0;
+      border-bottom: 2px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(30px, 5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -2px;
+    }
+
+    .logo span {
+      color: var(--red);
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    nav a:hover {
+      color: var(--red);
+    }
+
+    .hero {
+      padding: 64px 0 54px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+
+    h1, h2, h3 {
+      font-family: "Playfair Display", serif;
+    }
+
+    h1 {
+      font-size: clamp(48px, 7.5vw, 88px);
+      line-height: 0.98;
+      letter-spacing: -3px;
+      margin-bottom: 24px;
+    }
+
+    h1 em {
+      color: var(--red);
+      font-weight: 500;
+    }
+
+    .intro {
+      max-width: 440px;
+      color: #655d50;
+      line-height: 1.9;
+      font-size: 14px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-block;
+      border: 1px solid var(--ink);
+      padding: 13px 18px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+
+    .btn.primary {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .btn:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+    }
+
+    .cover {
+      position: relative;
+      background: #d8c9ac;
+      min-height: 370px;
+      padding: 26px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+
+    .cover::before,
+    .cover::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(41,37,30,.22);
+      border-radius: 50%;
+      width: 300px;
+      height: 300px;
+    }
+
+    .cover::after {
+      width: 340px;
+      height: 340px;
+    }
+
+    .vinyl {
+      width: min(72%, 290px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        repeating-radial-gradient(
+          circle,
+          #25241f 0px,
+          #25241f 2px,
+          #34322c 3px,
+          #1c1b18 4px,
+          #25241f 6px
+        );
+      display: grid;
+      place-items: center;
+      box-shadow: 0 18px 30px #453b2b40;
+      animation: spin 12s linear infinite;
+    }
+
+    .label {
+      width: 34%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--red);
+      border: 7px double #d7bba0;
+      display: grid;
+      place-items: center;
+      color: #f2ead9;
+      font-family: "Playfair Display", serif;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .label small {
+      font-family: "DM Mono", monospace;
+      font-size: 8px;
+      display: block;
+      margin-top: 4px;
+    }
+
+    .cover-tag {
+      position: absolute;
+      z-index: 1;
+      background: var(--paper);
+      padding: 9px 12px;
+    }
+
+    .cover-tag.top {
+      top: 20px;
+      left: 20px;
+    }
+
+    .cover-tag.bottom {
+      right: 20px;
+      bottom: 20px;
+      transform: rotate(-4deg);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .ticker {
+      background: var(--red);
+      color: #fff3df;
+      overflow: hidden;
+      padding: 13px 0;
+      white-space: nowrap;
+      margin-bottom: 70px;
+    }
+
+    .ticker p {
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 2px;
+      animation: marquee 24s linear infinite;
+    }
+
+    @keyframes marquee {
+      to { transform: translateX(-35%); }
+    }
+
+    section {
+      padding: 0 0 76px;
+      scroll-margin-top: 24px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 17px;
+      margin-bottom: 26px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(32px, 5vw, 48px);
+      letter-spacing: -1.5px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .genre-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .genre {
+      min-height: 245px;
+      padding: 23px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--line);
+      transition: transform .25s;
+    }
+
+    .genre:hover {
+      transform: translateY(-5px);
+    }
+
+    .genre:nth-child(1) { background: #d8b8a1; }
+    .genre:nth-child(2) { background: #c9cdb2; }
+    .genre:nth-child(3) { background: #d8b8b0; }
+
+    .genre .number {
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+    }
+
+    .genre h3 {
+      font-size: 33px;
+      line-height: 1.1;
+      margin: 28px 0 12px;
+    }
+
+    .genre p {
+      font-size: 12px;
+      line-height: 1.8;
+      max-width: 260px;
+    }
+
+    .genre .arrow {
+      align-self: end;
+      font-size: 24px;
+    }
+
+    .playlist {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 38px;
+      align-items: start;
+    }
+
+    .playlist-poster {
+      background: var(--olive);
+      color: #f2ead9;
+      padding: 30px;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .playlist-poster h3 {
+      font-size: clamp(35px, 5vw, 54px);
+      line-height: 1.04;
+    }
+
+    .playlist-poster .stamp {
+      font-size: 10px;
+      border: 1px solid #f2ead9;
+      align-self: start;
+      padding: 7px 10px;
+      transform: rotate(-3deg);
+    }
+
+    .track {
+      display: grid;
+      grid-template-columns: 40px 1fr auto;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 1px solid var(--line);
+      padding: 17px 0;
+    }
+
+    .track:first-child {
+      border-top: 1px solid var(--line);
+    }
+
+    .track .num {
+      font-family: "DM Mono", monospace;
+      color: var(--red);
+    }
+
+    .track h3 {
+      font-size: 19px;
+      margin-bottom: 5px;
+    }
+
+    .track p {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .track button {
+      border: 1px solid var(--line);
+      width: 36px;
+      height: 36px;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+
+    .track button:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .note {
+      background: #e5dbc8;
+      padding: 36px;
+      border-left: 5px solid var(--red);
+    }
+
+    .note h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      margin: 12px 0;
+    }
+
+    .note p {
+      line-height: 1.9;
+      max-width: 720px;
+      font-size: 13px;
+      color: #655d50;
+    }
+
+    .quote {
+      margin-top: 24px;
+      font-family: "Playfair Display", serif;
+      font-size: 23px;
+      font-style: italic;
+    }
+
+    footer {
+      border-top: 2px solid var(--ink);
+      padding: 25px 0 35px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+
+    footer strong {
+      font-family: "Playfair Display", serif;
+      color: var(--ink);
+      font-size: 23px;
+    }
+
+    @media (max-width: 760px) {
+      .topline {
+        font-size: 9px;
+      }
+
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav {
+        gap: 15px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 42px;
+        gap: 30px;
+      }
+
+      .cover {
+        min-height: 320px;
+      }
+
+      .genre-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .genre {
+        min-height: 200px;
+      }
+
+      .playlist {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .ticker {
+        margin-bottom: 50px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topline mono">
+      <span>Independent music journal</span>
+      <span>Issue No. 001 — Vietnam</span>
+    </div>
+
+    <header>
+      <a class="logo" href="#">AFTER<span>TONE.</span></a>
+      <nav>
+        <a href="#genres">Thể loại</a>
+        <a href="#playlist">Playlist</a>
+        <a href="#story">Góc nhìn</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow mono">✳ A little noise, a lot of feeling</p>
+          <h1>Âm nhạc<br>của <em>chúng ta.</em></h1>
+          <p class="intro">
+            Một góc nhỏ dành cho thế hệ trẻ và những thanh âm
+            đang định hình cách chúng ta sống, yêu, buồn và
+            kể câu chuyện của chính mình.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="#genres">Khám phá âm nhạc ↗</a>
+            <a class="btn" href="#story">Đọc câu chuyện</a>
+          </div>
+        </div>
+
+        <div class="cover">
+          <span class="cover-tag top mono">Side A / Youth</span>
+          <div class="vinyl">
+            <div class="label">
+              <div>AFTERTONE<small>33⅓ RPM</small></div>
+            </div>
+          </div>
+          <span class="cover-tag bottom mono">Play it loud!</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="ticker">
+    <p>
+      INDIE ✳ HIP-HOP ✳ R&B ✳ BEDROOM POP ✳ VIETNAMESE MUSIC ✳
+      INDIE ✳ HIP-HOP ✳ R&B ✳ BEDROOM POP ✳ VIETNAMESE MUSIC ✳
+    </p>
+  </div>
+
+  <div class="wrap">
+    <section id="genres">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow mono">01 / Find your sound</p>
+          <h2>Mỗi người một gu.</h2>
+        </div>
+        <p>THREE SOUNDS, ENDLESS STORIES</p>
+      </div>
+
+      <div class="genre-grid">
+        <article class="genre">
+          <span class="number">NO. 001 / SOFT & RAW</span>
+          <div>
+            <h3>Indie<br>& Bedroom Pop</h3>
+            <p>Những giai điệu gần gũi, riêng tư và đôi khi
+              vụng về theo cách rất đẹp.</p>
+          </div>
+          <span class="arrow">↗</span>
+        </article>
+
+        <article class="genre">
+          <span class="number">NO. 002 / BEAT & FLOW</span>
+          <div>
+            <h3>Hip-hop<br>& Rap</h3>
+            <p>Nhịp điệu, cá tính và những câu chuyện
+              về bản thân, xã hội, tuổi trẻ.</p>
+          </div>
+          <span class="arrow">↗</span>
+        </article>
+
+        <article class="genre">
+          <span class="number">NO. 003 / LATE NIGHT</span>
+          <div>
+            <h3>R&B<br>& Soul</h3>
+            <p>Thanh âm mềm mại cho những đêm dài,
+              cảm xúc khó nói thành lời.</p>
+          </div>
+          <span class="arrow">↗</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="playlist">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow mono">02 / Listening room</p>
+          <h2>Đặt kim xuống.</h2>
+        </div>
+        <p>YOUR NEXT FAVORITE SONG</p>
+      </div>
+
+      <div class="playlist">
+        <div class="playlist-poster">
+          <span class="mono">The mixtape / 001</span>
+          <h3>Những bài<br>hát cho<br>tuổi trẻ.</h3>
+          <span class="stamp mono">HANDPICKED WITH LOVE</span>
+        </div>
+
+        <div>
+          <article class="track">
+            <span class="num">01</span>
+            <div>
+              <h3>Indie Mood</h3>
+              <p>Guitar · Chậm rãi · Mơ màng</p>
+            </div>
+            <button aria-label="Tìm nhạc Indie"
+              data-search="indie music">↗</button>
+          </article>
+
+          <article class="track">
+            <span class="num">02</span>
+            <div>
+              <h3>City After Dark</h3>
+              <p>R&B · Đêm muộn · Chill</p>
+            </div>
+            <button aria-label="Tìm nhạc R&B"
+              data-search="R&B music">↗</button>
+          </article>
+
+          <article class="track">
+            <span class="num">03</span>
+            <div>
+              <h3>Say It Out Loud</h3>
+              <p>Hip-hop · Năng lượng · Cá tính</p>
+            </div>
+            <button aria-label="Tìm nhạc hip-hop"
+              data-search="hip hop music">↗</button>
+          </article>
+
+          <article class="track">
+            <span class="num">04</span>
+            <div>
+              <h3>Vietnamese Frequencies</h3>
+              <p>V-pop · Indie Việt · Khám phá</p>
+            </div>
+            <button aria-label="Tìm nhạc Việt"
+              data-search="Vietnamese indie music">↗</button>
+          </article>
+
+          <p style="font-size:11px;color:var(--muted);margin-top:16px;line-height:1.8">
+            Đây là các chủ đề playlist gợi ý, không phải tên bài hát
+            hay danh sách xếp hạng thực tế.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="story">
+      <div class="note">
+        <span class="mono">03 / A thought to keep</span>
+        <h2>Không chỉ là nghe.</h2>
+        <p>
+          Với nhiều người trẻ, âm nhạc còn là cách thể hiện cá tính,
+          tìm thấy cộng đồng và gọi tên những cảm xúc khó diễn tả.
+          Có người tìm đến rap để nói lên suy nghĩ, có người nghe
+          indie khi cần một khoảng riêng, và có người tìm thấy
+          chính mình trong những giai điệu pop quen thuộc.
+        </p>
+        <div class="quote">
+          “Một giai điệu cũ, một cảm xúc mới.”
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        <strong>AFTERTONE.</strong>
+        <p class="mono" style="margin-top:8px">
+          Music · Youth · Culture
+        </p>
+      </div>
+      <p class="mono">MADE WITH ♡ AND A LITTLE NOSTALGIA</p>
+    </footer>
+  </div>
+
+  <script>
+    document.querySelectorAll("[data-search]").forEach(button => {
+      button.addEventListener("click", () => {
+        const query = button.dataset.search;
+        const url = "https://www.youtube.com/results?search_query="
+          + encodeURIComponent(query);
+        window.open(url, "_blank", "noopener,noreferrer");
+      });
+    });
+  </script>
+</body>
+</html>
